@@ -1,5 +1,6 @@
-import express, { request, response } from 'express';
+import express from 'express';
 import bachecaPost from './bachecaPost.js';
+import { messaggiaClaude } from './utils/claudio.js';
 
 const app = express();
 const SERVER_PORT = process.env.SERVER_PORT || 3000;
@@ -20,11 +21,24 @@ app.get('/bacheca', (request, response) => {
     response.json(bachecaPost.map(post => {
         return {
             ...post,
-            immagine: `http://localhost:3000/${post.immagine}`
+            immagine: `http://localhost:${SERVER_PORT}/${post.immagine}`
         }
     }));
 })
 
+app.get('/claudio', (request, response) => {
+
+    const { msg: messagioUtente } = request.query;
+
+    return messaggiaClaude(messagioUtente).then(aiResponse => {
+        const rispostaClaude = aiResponse.content;
+        response.json({
+            messaggio: rispostaClaude
+        });
+    })
+})
+
 app.listen(SERVER_PORT, () => {
+
     console.log(`Server in ascolto su ${SERVER_PORT}`);
 })
