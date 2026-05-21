@@ -56,7 +56,7 @@ cd express-blog-intro
 
 ### 2. Configura le variabili di ambiente
 
-Crea un file `.env` nella root del progetto.
+Crea un file chiamato `.env` nella root del progetto prendendo come riferimento il file `.env.example`. Ad esempio, inserisci all'interno:
 
 Contenuto esempio:
 ```
