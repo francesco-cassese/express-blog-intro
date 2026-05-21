@@ -1,10 +1,12 @@
 import express from 'express';
 import bachecaPost from './bachecaPost.js';
 import { messaggiaClaude } from './utils/claudio.js';
+import cors from 'cors';
 
 const app = express();
 const SERVER_PORT = process.env.SERVER_PORT || 3000;
 
+app.use(cors());
 app.use(express.static('public', {
     index: false
 }));
