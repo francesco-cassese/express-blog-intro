@@ -11,7 +11,7 @@ app.use(express.static('public', {
 /* http://localhost:3000 */
 
 app.get('/', (request, response) => {
-    response.send('Server del mio blog');
+    response.send('<h1>Server del mio blog</h1>');
 })
 
 /* http://localhost:3000/bacheca*/
