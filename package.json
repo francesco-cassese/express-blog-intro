@@ -4,7 +4,7 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "start":"node --env-file=.env main.js",
+    "start": "node --env-file=.env main.js",
     "watch": "node --watch --env-file=.env main.js "
   },
   "keywords": [],
@@ -17,5 +17,8 @@
       "onFail": "download"
     }
   },
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
 }
