@@ -1,7 +1,7 @@
 import express, { response } from 'express';
 
 const app = express();
-const SERVER_PORT = process.env.SERVER_PORT;
+const SERVER_PORT = process.env.SERVER_PORT || 3000;
 
 /* http://localhost:3000 */
 
