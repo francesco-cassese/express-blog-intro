@@ -30,3 +30,5 @@ const bachecaPost = [
         tag: ["benessere", "salute", "mindfulness", "meditazione"]
     }
 ];
+
+export default bachecaPost;

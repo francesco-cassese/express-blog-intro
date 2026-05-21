@@ -1,4 +1,5 @@
-import express, { response } from 'express';
+import express, { request, response } from 'express';
+import bachecaPost from './bachecaPost.js';
 
 const app = express();
 const SERVER_PORT = process.env.SERVER_PORT || 3000;
@@ -7,6 +8,17 @@ const SERVER_PORT = process.env.SERVER_PORT || 3000;
 
 app.get('/', (request, response) => {
     response.send('Server del mio blog');
+})
+
+/* http://localhost:3000/bacheca*/
+
+app.get('/bacheca', (request, response) => {
+    response.json(bachecaPost.map(post => {
+        return {
+            ...post,
+            immagine: `http://localhost:3000/${post.immagine}`
+        }
+    }));
 })
 
 app.listen(SERVER_PORT, () => {
