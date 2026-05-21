@@ -4,7 +4,9 @@ import bachecaPost from './bachecaPost.js';
 const app = express();
 const SERVER_PORT = process.env.SERVER_PORT || 3000;
 
-app.use(express.static('public'));
+app.use(express.static('public', {
+    index: false
+}));
 
 /* http://localhost:3000 */
 
