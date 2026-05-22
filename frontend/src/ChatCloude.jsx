@@ -13,7 +13,11 @@ function ChatCloude() {
 
         setLoading(true);
 
-        fetch(`http://localhost:3000/claudio?msg=${encodeURIComponent(text)}`)
+        const params = new URLSearchParams({
+            msg: text
+        });
+
+        fetch(`http://localhost:3000/claudio?${params.toString()}`)
             .then(response => response.json())
             .then(data => {
                 setMsg(data.messaggio);
