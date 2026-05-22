@@ -40,7 +40,11 @@ app.get('/claudio', (request, response) => {
     })
 })
 
-app.listen(SERVER_PORT, () => {
+app.listen(SERVER_PORT, (error) => {
 
-    console.log(`Server in ascolto su ${SERVER_PORT}`);
+    if (error) {
+        console.log('Il Server ha avuto dei problemi');
+    } else {
+        console.log(`Server in ascolto su ${SERVER_PORT}`);
+    }
 })
