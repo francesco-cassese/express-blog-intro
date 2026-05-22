@@ -4,9 +4,7 @@ import ChatCloude from './ChatCloude'
 function App() {
   return (
     <>
-      <div className={styles.container}>
-        <ChatCloude />
-      </div>
+      <ChatCloude />
     </>
   )
 }

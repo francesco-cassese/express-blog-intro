@@ -1,25 +1,69 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
+import style from "./ChatCloude.module.css";
 
 function ChatCloude() {
 
-    const msg = 'Ciao come va?'
+    const [input, setInput] = useState("");
+    const [msg, setMsg] = useState("scrivi qualcosa...");
+    const [loading, setLoading] = useState(false);
 
-    const urlMioServer = `http://localhost:3000/claudio?msg=${msg}`
+    function sendMessage(text) {
 
-    const [messaggioClaude, setMessaggioClaude] = useState('')
+        if (!text || loading) return;
+
+        setLoading(true);
+
+        fetch(`http://localhost:3000/claudio?msg=${encodeURIComponent(text)}`)
+            .then(response => response.json())
+            .then(data => {
+                setMsg(data.messaggio);
+                setLoading(false);
+            });
+    }
+
+    const changeHandler = event => {
+        setInput(event.target.value)
+    }
+
+    const submitHandler = event => {
+        event.preventDefault();
+        sendMessage(input);
+    };
+
     useEffect(() => {
-        fetch(urlMioServer)
-            .then(response => {
-                return response.json();
-            })
-            .then(json => {
-                console.log(json);
-                setMessaggioClaude(json.messaggio)
-            })
-    }, [])
+        sendMessage("Ciao");
+    }, []);
 
     return (
-        <h1>{messaggioClaude}</h1>
-    )
+        <div className={style.page}>
+            <div className={style.card}>
+                <div className={style.header}> Claudio AI</div>
+                <div className={style.screen}>
+                    {loading ?
+                        <div className="spinner-border text-primary" role="status">
+                            <span className="visually-hidden">Loading...</span>
+                        </div>
+                        :
+                        msg}
+                </div>
+                <div className={style.inputRow}>
+                    <form onSubmit={submitHandler}>
+                        <input
+                            value={input}
+                            onChange={changeHandler}
+                            placeholder="scrivi un messaggio..."
+                            disabled={loading}
+                        />
+                        <button
+                            disabled={loading}
+                        >
+                            {loading ? "..." : "Invia"}
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div >
+    );
 }
-export default ChatCloude
+
+export default ChatCloude;
